@@ -1,5 +1,6 @@
 import streamlit as st
 from transcripter import summarize_transcript, extract_video_id
+from youtube_transcript_api import YouTubeTranscriptApi
 
 def main():
     '''
@@ -11,7 +12,7 @@ def main():
 
 
     # Input fields
-    url = st.text_input("What are you too lazy to watch?", help="Enter video URL")
+    url = st.text_input("What are you too lazy to watch? (Paste URL here)", help="Enter video URL")
 
     # Submit button
     if st.button("Submit"):
@@ -23,7 +24,20 @@ def main():
         # Get the summary
         st.write("Processing your request...")
         with st.spinner("Summarizing..."):
-            output = summarize_transcript(st.session_state.video_id)
+
+
+            try:
+                transcript_list = YouTubeTranscriptApi.get_transcript(st.session_state.video_id)
+            except Exception as e:
+                print("❌ Failed to fetch transcript:", e)
+                return
+
+            full_text = " ".join(seg["text"] for seg in transcript_list)
+            print("\n— Transcript Preview —\n")
+            print(full_text[:500] + "…\n")  # preview first 500 chars
+
+            output = summarize_transcript(full_text)
+
 
         # Display 
         st.write(output)
