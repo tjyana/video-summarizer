@@ -12,7 +12,7 @@ def main():
 
 
     # Input fields
-    url = st.text_input("What are you too lazy to watch? (Paste URL here)", help="Enter video URL")
+    url = st.text_input("What are you too lazy to watch? (Paste URL here)", help="Only works for YouTube URLs, up to maybe 30min long.")
 
     # Submit button
     if st.button("Submit"):
