@@ -8,12 +8,12 @@ def main():
     '''
 
     # Title
-    st.title("YouTube Video Summarizer")
+    st.title("Video Summarizer")
     st.subheader("Let me summarize that YouTube video for you!")
     st.write("Paste a YouTube video URL below. (Only works for YouTube URLs, up to maybe 30min long.)")
 
     # Input fields
-    url = st.text_input("What are you too lazy to watch?", help="Long videos may not work well. Try to keep it under 30 minutes.")
+    url = st.text_input("What are you too lazy to watch?", help="Videos that probably won't work: live streams, videos longer than 30 minutes.")
 
     # Submit button
     if st.button("Submit"):
@@ -30,9 +30,9 @@ def main():
             
 
             try:
-                transcript_list = YouTubeTranscriptApi.get_transcript(st.session_state.video_id)
+                transcript_list = YouTubeTranscriptApi.get_transcript(st.session_state.video_id, languages=['en', 'ja'])
             except Exception as e:
-                print("❌ Failed to fetch transcript:", e)
+                st.write("❌ Failed to fetch transcript:", e)
                 return
 
             full_text = " ".join(seg["text"] for seg in transcript_list)
