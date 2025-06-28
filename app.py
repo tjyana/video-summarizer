@@ -8,11 +8,12 @@ def main():
     '''
 
     # Title
-    st.title("Video Summaries (YouTube)")
-
+    st.title("YouTube Video Summarizer")
+    st.subheader("Let me summarize that YouTube video for you!")
+    st.write("Paste a YouTube video URL below. (Only works for YouTube URLs, up to maybe 30min long.)")
 
     # Input fields
-    url = st.text_input("What are you too lazy to watch? (Paste URL here)", help="Only works for YouTube URLs, up to maybe 30min long.")
+    url = st.text_input("What are you too lazy to watch?", help="Long videos may not work well. Try to keep it under 30 minutes.")
 
     # Submit button
     if st.button("Submit"):
