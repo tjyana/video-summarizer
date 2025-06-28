@@ -33,8 +33,8 @@ def main():
                 return
 
             full_text = " ".join(seg["text"] for seg in transcript_list)
-            print("\n— Transcript Preview —\n")
-            print(full_text[:500] + "…\n")  # preview first 500 chars
+            st.write("\n— Transcript Preview —\n")
+            st.write(full_text[:500] + "…\n")  # preview first 500 chars
 
             output = summarize_transcript(full_text)
 
