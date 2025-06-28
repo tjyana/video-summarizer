@@ -42,7 +42,7 @@ def summarize_transcript(
     Sends the full transcript to OpenAI and returns a summary.
     """
     prompt = (
-        "You are a helpful assistant that summarizes YouTube videos. "
+        "You are a helpful assistant that summarizes YouTube videos. Imagine that you are helping someone who is too lazy to watch the video but needs to understand its content quickly.\n\n"
         "Please provide a concise summary in 1 sentence, and also provide an outline of the main points in bulletpoints.\n\n"
         f"{transcript_text}"
     )
