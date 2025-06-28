@@ -20,11 +20,12 @@ def main():
         # Process the inputs
         video_id = extract_video_id(url)
         st.session_state.video_id = video_id
+        st.write(st.session_state.video_id)
 
         # Get the summary
         st.write("Processing your request...")
         with st.spinner("Summarizing..."):
-
+            
 
             try:
                 transcript_list = YouTubeTranscriptApi.get_transcript(st.session_state.video_id)
