@@ -43,7 +43,7 @@ def summarize_transcript(
     """
     prompt = (
         "You are a helpful assistant that summarizes YouTube videos. "
-        "Please provide a concise summary in 3–5 sentences:\n\n"
+        "Please provide a concise summary in 1 sentence, and also provide an outline of the main points in bulletpoints.\n\n"
         f"{transcript_text}"
     )
     try:
