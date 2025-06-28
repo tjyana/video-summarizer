@@ -62,28 +62,27 @@ def summarize_transcript(
     return resp.choices[0].message.content.strip()
 
 
-def main():
-    # url = input("Enter a YouTube URL: ").strip()
-    url = url.strip()
-    video_id = extract_video_id(url)
-    if not video_id:
-        print("❌ Could not extract a video ID from that URL.")
-        return
+# def main():
+#     url = input("Enter a YouTube URL: ").strip()
+#     video_id = extract_video_id(url)
+#     if not video_id:
+#         print("❌ Could not extract a video ID from that URL.")
+#         return
 
-    try:
-        transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
-    except Exception as e:
-        print("❌ Failed to fetch transcript:", e)
-        return
+#     try:
+#         transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
+#     except Exception as e:
+#         print("❌ Failed to fetch transcript:", e)
+#         return
 
-    full_text = " ".join(seg["text"] for seg in transcript_list)
-    print("\n— Transcript Preview —\n")
-    print(full_text[:500] + "…\n")  # preview first 500 chars
+#     full_text = " ".join(seg["text"] for seg in transcript_list)
+#     print("\n— Transcript Preview —\n")
+#     print(full_text[:500] + "…\n")  # preview first 500 chars
 
-    summary = summarize_transcript(full_text)
-    print("\n— Video Summary —\n")
-    print(summary)
+#     summary = summarize_transcript(full_text)
+#     print("\n— Video Summary —\n")
+#     print(summary)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
