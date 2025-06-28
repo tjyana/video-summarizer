@@ -1,24 +1,34 @@
-import os
-from dotenv import load_dotenv
+import streamlit as st
+from transcripter import summarize_transcript, extract_video_id
 
-# 1. Load .env
-load_dotenv()
+def main():
+    '''
+    Main function for the Streamlit app.
+    '''
 
-# 2. Quick check to see if the key is coming through
-print("Loaded key:", os.getenv("OPENAI_API_KEY"))  
+    # Title
+    st.title("YouTube Video Summarizer")
 
-from openai import OpenAI
 
-# 3. Now instantiate the client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    # Input fields
+    url = st.text_input("What are you too lazy to watch?", help="Enter video URL")
 
-# 4. Simple test call
-response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "What is 2 + 2?"}
-    ]
-)
-print("Got reply:", response.choices[0].message.content)
+    # Submit button
+    if st.button("Submit"):
 
+        # Process the inputs
+        video_id = extract_video_id(url)
+        st.session_state.video_id = video_id
+
+        # Get the summary
+        st.write("Processing your request...")
+        with st.spinner("Summarizing..."):
+            output = summarize_transcript(st.session_state.video_id)
+
+        # Display 
+        st.write(output)
+
+
+
+if __name__ == "__main__":
+    main()

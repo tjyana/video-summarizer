@@ -1,4 +1,5 @@
 import os
+import streamlit as st
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qs
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -8,7 +9,9 @@ from openai import OpenAI
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
-    raise RuntimeError("OPENAI_API_KEY not set. Check your .env file.")
+    api_key = st.secrets['OPENAI_API_KEY']
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY not set. Check your secrets.")
 
 # Instantiate the v1 client
 client = OpenAI(api_key=api_key)
@@ -60,7 +63,8 @@ def summarize_transcript(
 
 
 def main():
-    url = input("Enter a YouTube URL: ").strip()
+    # url = input("Enter a YouTube URL: ").strip()
+    url = url.strip()
     video_id = extract_video_id(url)
     if not video_id:
         print("❌ Could not extract a video ID from that URL.")
