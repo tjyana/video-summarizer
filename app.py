@@ -8,7 +8,7 @@ def main():
     '''
 
     # Title
-    st.title("YouTube Video Summarizer")
+    st.title("Video Summaries (YouTube)")
 
 
     # Input fields
